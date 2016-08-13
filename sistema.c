@@ -5,10 +5,6 @@
 #include "sistema.h"
 
 
-
-
-
-
 void crearBloque(char* id, char* type){
     int byteInicio;
     time_t tiempo = time(0);
@@ -30,11 +26,10 @@ void crearBloque(char* id, char* type){
     arbolavd avd;
 
 
-
-
     if(strcmp(parti.path,"null")==0) {
         printf("\n X- Aun no existe Particion Montada -X\n");
     }else{
+
 
         FILE* disco;
         disco = fopen(parti.path,"r");

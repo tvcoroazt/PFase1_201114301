@@ -8,14 +8,10 @@
 
 
 
-
-
-
-
-
 void reporteMbr(char* path, char* id){
     MBR mbr;
     EBR ebr;
+
 
     particiones parti;
     parti = ExisteParticion(id);
