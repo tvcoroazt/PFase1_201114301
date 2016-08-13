@@ -110,19 +110,26 @@ void imprimirComandos(char* cad){
     //recorre la cadena y obtine los valores de los parametros
       while(cad[i]!='\0'){
           if(comillas == false){
-            if( (cad[i]==':' && cad[i+1]==':') || (cad[i]==':' && cad[i+1]==':' && cad[i+2]=='"') ){
+            if( (cad[i]==':' && cad[i+1]==':') || (cad[i]==':' && cad[i+1]==':' ) ){
 
                   indicador++;
                   i++;
                   si=true;
 
-                  if(cad[i]== '"') comillas =true;
+                  if(cad[i]=='"') {
+                      comillas =true;
+                     // printf("pasa por aca 2");
+
+                  }
               }else
               if(cad[i]==' '){
                   si = false;
               }
           }else{
-              if(cad[i]== '"') comillas =false;
+              if(cad[i]=='"') {
+                  comillas =false;
+                  //printf("pasa por aca 3");
+              }
           }
 
 
@@ -233,7 +240,9 @@ if (comillas == false){
                   si = false;
           }
 }      else{
-    if(cad[i]== '"') comillas =false;
+    if(cad[i]== '"') {
+        comillas =false;
+    }
 }
 
 
@@ -431,8 +440,9 @@ void comandosLista(char* cadena){
         char path[100]= "null\0";
         char name[15]= "null\0";
 
-        char rutacomp[100]="null\0";
+
          char rutacomp2[100]="null\0";
+         char rutacomp3[100]="null\0";
         int i;
         for(i=0; i<numParemetros; i++){
             if(strcmp(parametros[i].valor,"-size")==0){
@@ -445,13 +455,14 @@ void comandosLista(char* cadena){
                 strcpy(path,valores[i].valor);
 
 
-                int cont;
                 int iz;
                 for(iz=0; path[iz]!=' '; iz++) {
 
                 rutacomp2[iz]=path[iz];
-                cont++;
                 }
+
+
+
                // strcpy(rutacomp2,' ');
 
 
@@ -488,6 +499,9 @@ void comandosLista(char* cadena){
 
             strcat(rutacomp2,name);
             printf("Ruta: -%s- \n",rutacomp2);
+
+
+
             crearDisco(atoi(size),rutacomp2,unit);                         // ------- va a a crear discos
 
         }

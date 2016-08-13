@@ -1,0 +1,18 @@
+graph G {
+	rankdir = TR;
+
+	graph [bgcolor="#F2F2F2"];
+	node [shape=record style=filled fillcolor="#F5DA81"]
+
+	subgraph cluster0 {
+		label = "Reporte de Discos /home/victor/miad1.dsk";
+		color=black;
+		LIBRE [label = "LIBRE" ];
+		parti1_1 [label = "EXTENDIDA" ];
+		LIBRE1 [label = "LIBRE" ];
+		parti1_1[label = "EXTENDIDA" ] ;
+		parti1_0 [label = "PRIMARIA" ];
+		MBR;
+
+	}
+}

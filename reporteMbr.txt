@@ -1,0 +1,42 @@
+digraph G {
+
+node [shape=plaintext]
+a [label=<<table border="0" cellborder="1" cellspacing="0">
+
+<tr><td><b>Nombre</b></td><td><b>Valor</b></td></tr>
+<tr><td> mbr_tamano         </td><td> 61440 </td></tr>
+<tr><td> mbr_fecha_de_creacion  </td><td> 12/08/16 22:54 </td></tr>
+<tr><td> mbr_disk_signature </td><td> 7 </td></tr>
+<tr><td colspan="2"><b> Particion No. 1</b></td></tr><tr><td> part_status_1 </td><td> 1 </td></tr>
+<tr><td> part_type_1   </td><td> p </td></tr>
+<tr><td> part_fit_1    </td><td> w </td></tr>
+<tr><td> part_start_1  </td><td> 136 </td></tr>
+<tr><td> part_size_1   </td><td> 10240 </td></tr>
+<tr><td> part_name_1   </td><td> pri1 </td></tr>
+<tr><td colspan="2"><b> Particion No. 2</b></td></tr><tr><td> part_status_2 </td><td> 1 </td></tr>
+<tr><td> part_type_2   </td><td> e </td></tr>
+<tr><td> part_fit_2    </td><td> w </td></tr>
+<tr><td> part_start_2  </td><td> 10376 </td></tr>
+<tr><td> part_size_2   </td><td> 25600 </td></tr>
+<tr><td> part_name_2   </td><td> ext1 </td></tr>
+<tr><td colspan="2"><b> Particion No. 3</b></td></tr><tr><td> part_status_3 </td><td> 0 </td></tr>
+<tr><td> part_type_3   </td><td> 0 </td></tr>
+<tr><td> part_fit_3    </td><td> 0 </td></tr>
+<tr><td> part_start_3  </td><td> -1 </td></tr>
+<tr><td> part_size_3   </td><td> -1 </td></tr>
+<tr><td> part_name_3   </td><td> null </td></tr>
+<tr><td colspan="2"><b> Particion No. 4</b></td></tr><tr><td> part_status_4 </td><td> 0 </td></tr>
+<tr><td> part_type_4   </td><td> 0 </td></tr>
+<tr><td> part_fit_4    </td><td> 0 </td></tr>
+<tr><td> part_start_4  </td><td> -1 </td></tr>
+<tr><td> part_size_4   </td><td> -1 </td></tr>
+<tr><td> part_name_4   </td><td> null </td></tr>
+<tr><td colspan="2"><b> EBR </b></td></tr><tr><td><b>Nombre</b></td><td><b>Valor</b></td></tr>
+<tr><td> part_status         </td><td> 0 </td></tr>
+<tr><td> part_fit         </td><td> 0 </td></tr>
+<tr><td> part_start         </td><td> -1 </td></tr>
+<tr><td> part_size         </td><td> -1 </td></tr>
+<tr><td> part_status         </td><td> 0 </td></tr>
+</table>>];
+
+}

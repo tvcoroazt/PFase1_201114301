@@ -5,7 +5,7 @@ CONFIG -= qt
 
 
 TEMPLATE = app
-TARGET = Fase1Proyecto
+TARGET = proyectofase1
 QT += core gui
 QT += widgets
 #INCLUDEPATH += .
