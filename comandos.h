@@ -7,6 +7,10 @@
 #include "signal.h"
 
 
+
+
+
+
 extern void ingresarComando();
 extern void bienvenida();
 

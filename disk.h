@@ -12,6 +12,8 @@ typedef struct part{
     char name[16];
 }part;
 
+
+
 typedef struct MBR{
     int mbr_tamano;
     char fecha_creacion[15];
