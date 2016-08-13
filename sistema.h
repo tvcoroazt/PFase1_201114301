@@ -2,6 +2,8 @@
 #define SISTEMA_H
 #include "disk.h"
 
+
+
 typedef struct superblok{
 char cant_b[10];
 char cant_ino[10];
