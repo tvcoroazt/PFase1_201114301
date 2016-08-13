@@ -93,6 +93,81 @@ int cantComandos(char* cad){
 
 void imprimirComandos(char* cad){
     int i=0;
+
+    int i1 =0;
+    int i2 =0;
+    int i3 =0;
+    int i4=0;
+    int i5=0;
+    int i6=0;
+
+    bool si;
+    si =false;
+    int indicador= 0;
+
+    bool comillas = false;
+
+    //recorre la cadena y obtine los valores de los parametros
+      while(cad[i]!='\0'){
+          if(comillas == false){
+            if( (cad[i]==':' && cad[i+1]==':') || (cad[i]==':' && cad[i+1]==':' && cad[i+2]=='"') ){
+
+                  indicador++;
+                  i++;
+                  si=true;
+
+                  if(cad[i]== '"') comillas =true;
+              }else
+              if(cad[i]==' '){
+                  si = false;
+              }
+          }else{
+              if(cad[i]== '"') comillas =false;
+          }
+
+
+          if(si){
+              if(indicador ==1){
+                  com1[i1] = cad[i+1];
+                  i1++;
+                  com1[i1] = '\0';
+              }else
+              if(indicador == 2){
+                  com2[i2] = cad[i+1];
+                  i2++;
+                  com2[i2] = '\0';
+              }else
+              if(indicador ==3){
+                  com3[i3] = cad[i+1];
+                  i3++;
+                  com3[i3] = '\0';
+              }else
+              if(indicador ==4){
+                  com4[i4] = cad[i+1];
+                  i4++;
+                  com4[i4] = '\0';
+              }else
+              if(indicador ==5){
+                  com5[i5] = cad[i+1];
+                  i5++;
+                  com5[i5] = '\0';
+              }else
+              if(indicador ==6){
+                  com6[i6] = cad[i+1];
+                  i6++;
+                  com6[i6] = '\0';
+              }
+          }
+
+          i++;
+      }
+
+      printf("  CAD3-> -%s,%s,%s,%s,%s,%s-\n",com1,com2,com3,com4,com5,com6);
+}
+
+
+void imprimirComandos2(char* cad){
+    int i=0;
     int i1 =0;
     int i2 =0;
     int i3 =0;
@@ -119,51 +194,48 @@ void imprimirComandos(char* cad){
 
     //   printf(cad);
 
- //   bool comillas = false;
+    bool comillas = false;
 
     //recorre la cadena y obtine los valores
       while(cad[i]!='\0'){
 
-          /*if(comillas == false){
+//          if(comillas == false){
 
-              if(cad[i]==':'){
-                  indicador++;
-                  i++;
-                  si=true;
+//              if(cad[i]==':'){
+//                  indicador++;
+//                  i++;
+//                  si=true;
+//                  if(cad[i]== '"') {
+//                      comillas = true;
+//                     // printf("tiene comillas");
+//                  }
+//              }else
+//              if(cad[i]==' '){
+//                  si = false;
+//              }
+//          }else{
+//              if(cad[i]== '"') {
+//                  comillas = true;
+//              }
+//          }
 
-                  if(cad[i]== '"') {
-                      comillas = true;
-                     // printf("tiene comillas");
-
-                  }
-              }else
-              if(cad[i]==' '){
-                  si = false;
-              }
-          }else{
-              if(cad[i]== '"') {
-                  comillas = true;
-              }
-          }*/
-
-
-
+if (comillas == false){
 
 
 
           if( (cad[i]==':' && cad[i+1]==':') || (cad[i]==':' && cad[i+1]==':' && cad[i+2]=='"') ){
-
               indicador++;
               i++;
               si=true;
-
-          }
-          else
-
+               if(cad[i]== '"') comillas =true;
+          }else
               if(cad[i]==' '){
                   si = false;
-
           }
+}      else{
+    if(cad[i]== '"') comillas =false;
+}
+
 
           if(si){
               if(indicador ==1){
@@ -279,10 +351,33 @@ void imprimir(char* cad){
         i++;
     }
 
-    printf("  CAD2 -> %s,%s,%s,%s,%s,%s-\n",par1,par2, par3,par4,par5,par6);
+    printf("  CAD2 -> %s,%s,%s,%s,%s,%s-\n",par1,par2,par3,par4,par5,par6);
 
 }
 
+char *trim(char *s)
+{
+  char *start = s;
+
+  /* Nos comemos los espacios al inicio */
+  while(*start && isspace(*start))
+    ++start;
+
+  char *i = start;
+  char *end = start;
+
+  /* Nos comemos los espacios al final */
+  while(*i)
+  {
+    if( !isspace(*(i++)) )
+      end = i;
+  }
+
+  /* Escribimos el terminados */
+  *end = 0;
+
+  return start;
+}
 
 
 void comandosLista(char* cadena){
@@ -290,10 +385,6 @@ void comandosLista(char* cadena){
     char cad[500];
     strcpy(cad,cadena);
     minusculas(cad);
-
-
-
-
 
     //en este metodo trabajo todo con la cadena de entrada
     imprimir(cad);
@@ -341,6 +432,7 @@ void comandosLista(char* cadena){
         char name[15]= "null\0";
 
         char rutacomp[100]="null\0";
+         char rutacomp2[100]="null\0";
         int i;
         for(i=0; i<numParemetros; i++){
             if(strcmp(parametros[i].valor,"-size")==0){
@@ -351,6 +443,19 @@ void comandosLista(char* cadena){
             }else
             if(strcmp(parametros[i].valor,"-path")==0){
                 strcpy(path,valores[i].valor);
+
+
+                int cont;
+                int iz;
+                for(iz=0; path[iz]!=' '; iz++) {
+
+                rutacomp2[iz]=path[iz];
+                cont++;
+                }
+               // strcpy(rutacomp2,' ');
+
+
+
             }else
                 if(strcmp(parametros[i].valor,"-name")==0){
                     strcpy(name,valores[i].valor);
@@ -365,24 +470,26 @@ void comandosLista(char* cadena){
 
             printf("\nSe esta creando -%s- de tamaño (%s)(%s) en -%s- \n",name,size,unit,path);
             printf("espere....... \n");
-            strcat(path,name);
-
-            int j;
-            int i;
-            while(path[i] != '\0')
-            {
-                if (path[i] != ' ')
-                {
-                    rutacomp[j]=path[i];
-                    j++;
-                }
-                i++;
-            }
-            rutacomp[j]='\0';
-            printf("ruta: -%s- \n",rutacomp);
 
 
-            crearDisco(atoi(size),rutacomp,unit);                         // ------- va a a crear discos
+
+//            int ia;
+//            int jb;
+//            while(path[ia] != '\0')
+//            {
+//                if (path[ia] != ' ')
+//                {
+//                    rutacomp[jb]=path[ia];
+//                    jb++;
+//                }
+//                ia++;
+//            }
+
+
+            strcat(rutacomp2,name);
+            printf("Ruta: -%s- \n",rutacomp2);
+            crearDisco(atoi(size),rutacomp2,unit);                         // ------- va a a crear discos
+
         }
     }else
 
@@ -424,6 +531,8 @@ void comandosLista(char* cadena){
         char name[30]="null";
         char add[15]= "null";
         int i;
+
+        char path2[100]="null\0";
         for(i=0; i<numParemetros; i++){
             if(strcmp(parametros[i].valor,"-size")==0){
                 strcpy(size,valores[i].valor);
@@ -433,6 +542,14 @@ void comandosLista(char* cadena){
             }else
             if(strcmp(parametros[i].valor,"-path")==0){
                 strcpy(path,valores[i].valor);
+
+
+                int iz;
+                for(iz=0; path[iz]!=' '; iz++) {
+                path2[iz]=path[iz];
+                }
+                printf("path de mkfs -%s- \n",path2);
+
             }else
             if(strcmp(parametros[i].valor,"+type")==0){
                 strcpy(type,valores[i].valor);
@@ -455,18 +572,17 @@ void comandosLista(char* cadena){
             if(strcmp(size,"null")==0 || strcmp(name,"null")==0 || strcmp(path,"null")==0){
                 printf("\n X - Error en el comando FDISK verifique - X \n");
             }else{
-                printf("Crear Particion (%s,%s,%s,%s,%s,%s) \n",size,unit,path,type,fit,name);    //  va acrear
-                printf("- Creando particion......... \n");
-                crearParticiones(atoi(size),path,name,unit,type,fit);
+                printf("Crear Particion (%s,%s,%s,%s,%s,%s) \n",size,unit,path2,type,fit,name);    //  va acrear
+                crearParticiones(atoi(size),path2,name,unit,type,fit);
             }
         }else
         if(strcmp(delete_,"null")==0){
-            printf("- Agregar Espacio(%s,%s,%s,%s) \n",add,unit,path,name);
-            formatearParticion(name,path,delete_);
+            printf("- Agregar Espacio(%s,%s,%s,%s) \n",add,unit,path2,name);
+            formatearParticion(name,path2,delete_);
         }else
         if(strcmp(add,"null")==0){
-            printf("- Formatear Particion (%s,%s,%s) \n",delete_,path,name);
-           formatearParticion(name,path,delete_);
+            printf("- Formatear Particion (%s,%s,%s) \n",delete_,path2,name);
+           formatearParticion(name,path2,delete_);
         }
 
     }else
