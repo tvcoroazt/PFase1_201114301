@@ -594,25 +594,34 @@ void comandosLista(char* cadena){
         char name[30]= "null\0";
         char path[100]="null\0";
         int i;
+
+        char path2[100]="null\0";
         for(i=0; i<numParemetros; i++){
             if(strcmp(parametros[i].valor,"-name")==0){
                 strcpy(name,valores[i].valor);
             }else
             if(strcmp(parametros[i].valor,"-path")==0){
                 strcpy(path,valores[i].valor);
+
+                int iz;
+                for(iz=0; path[iz]!=' '; iz++) {
+                path2[iz]=path[iz];
+                }
+                //printf("path de mount -%s- \n",path2);
+
             }
         }
 
         if(strcmp(path,"null")==0 || strcmp(name,"null")==0){
            printf("\n X - Error en el comando MOUNT verifique - X \n");
         }else{
-             montarParticion(path, name);
+             montarParticion(path2, name);
              printf("Se monto la particion con Exito!!  \n");
         }
     }else
 
     //----------------------------------------------------------------------------------------- UNMOUNT
-    if(strcmp(comando,"unmount")==0){
+    if(strcmp(comando,"umount")==0){
         char id[150]= "null\0";
         int i;
         for(i=0; i<numParemetros; i++){
@@ -621,10 +630,10 @@ void comandosLista(char* cadena){
             }
         }
         if(strcmp(id,"null")==0){
-            printf("\n X - Error en el comando UNMOUNT verifique - X \n");
+            printf("\n X - Error en el comando UMOUNT verifique - X \n");
         }else{
             printf("Id Recibido = %s\n ",id);
-            printf("Desmontando Unidad \n");
+            printf("Verificando - Desmontando Unidad \n");
             desmontarParticion(id);
         }
     }else

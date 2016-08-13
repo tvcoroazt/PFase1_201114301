@@ -4,9 +4,6 @@
 
 
 
-
-
-
 discos discosMontados[20];
 
 particiones particionesMontadas[20];
@@ -162,6 +159,7 @@ void desmontarParticion(char* id){
             }
         }
     }
+
 
     if(encontrado==0){
         printf("\n X - ERROR!! No Existe particion para desmontar - X \n");
