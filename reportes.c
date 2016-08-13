@@ -12,12 +12,10 @@ void reporteMbr(char* path, char* id){
     MBR mbr;
     EBR ebr;
 
-
     particiones parti;
     parti = ExisteParticion(id);
 
     if(strcmp(parti.path,"null")==0) {
-
         printf("\n X- Aun no existe -X\n");
     }
     else{
@@ -81,8 +79,23 @@ void reporteMbr(char* path, char* id){
                 fclose(disco);
                 fclose(reporte);
 
-                system("dot -Tpng reporteMbr.txt -o reporteMbr.png");
-                system("eog reporteMbr.png");
+
+                char consola[200];
+                strcpy(consola,"");
+                strcat(consola, "dot -Tjpg reporteMbr.txt -o ");
+                strcat(consola, path);
+                printf("%s\n",consola);
+                system(consola);
+
+
+                char consola2[200];
+                strcpy(consola2,"");
+                strcat(consola2, "eog ");
+                strcat(consola2, path);
+                system(consola2);
+
+                //system("dot -Tpng reporteMbr.txt -o reporteMbr.png");
+                //system("eog reporteMbr.png");
                 printf("\n EXITO!! - Reporte Creado \n");
             }
         }
@@ -200,8 +213,23 @@ void reporteDisco(char* path, char* id){
                 fprintf(reporte,"}\n");
                 fclose(reporte);
                 fclose(disco);
-                system("dot -Tpng reporteDisco.txt -o reporteDisco.png");
-                system("eog reporteDisco.png");
+
+                char consola[200];
+                strcpy(consola,"");
+                strcat(consola, "dot -Tjpg reporteDisco.txt -o ");
+                strcat(consola, path);
+                printf("%s\n",consola);
+                system(consola);
+
+
+                //system("dot -Tpng reporteDisco.txt -o %s",path);
+                char consola2[200];
+                strcpy(consola2,"");
+                strcat(consola2, "eog ");
+                strcat(consola2, path);
+                system(consola2);
+
+                //system("eog reporteDisco.png");
                 printf("\n EXITO!! - Reporte Creado \n");
             }
         }

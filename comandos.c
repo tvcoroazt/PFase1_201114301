@@ -525,7 +525,7 @@ void comandosLista(char* cadena){
         char size[15]="null\0";
         char unit[2]="k\0";
         char path[100]="null\0";
-        char type[2]="p\0";
+        char type[3]="p\0";
         char fit[3] = "wf\0";   // ---------------> aca venia a ser el WF que esl el peor ajuste por defecto
         char delete_[5]="null";
         char name[30]="null";
@@ -548,7 +548,7 @@ void comandosLista(char* cadena){
                 for(iz=0; path[iz]!=' '; iz++) {
                 path2[iz]=path[iz];
                 }
-                printf("path de mkfs -%s- \n",path2);
+               // printf("path de mkfs -%s- \n",path2);
 
             }else
             if(strcmp(parametros[i].valor,"+type")==0){
@@ -572,7 +572,7 @@ void comandosLista(char* cadena){
             if(strcmp(size,"null")==0 || strcmp(name,"null")==0 || strcmp(path,"null")==0){
                 printf("\n X - Error en el comando FDISK verifique - X \n");
             }else{
-                printf("Crear Particion (%s,%s,%s,%s,%s,%s) \n",size,unit,path2,type,fit,name);    //  va acrear
+                printf("Crear Particion - (%s,%s,%s,%s,%s,%s) \n",size,unit,path2,type,fit,name);    //  va acrear
                 crearParticiones(atoi(size),path2,name,unit,type,fit);
             }
         }else
@@ -672,7 +672,8 @@ void comandosLista(char* cadena){
                 printf("\n X - Error en el comando MKFS verifique - X  \n");
             }else {
                 printf("\n Comando de formateo de la particion (%s)(%s) \n",id,type);
-                printf("espere formateando....... \n \n");
+                printf("Espere formateando unidad ....... \n \n");
+                printf("formato -%s-",fs);
 
                 crearBloque(id,type);
 
@@ -838,7 +839,7 @@ void comandosLista(char* cadena){
         if(strcmp(id,"null")==0 || strcmp(path,"null")==0 || strcmp(name,"null")==0){
              printf("\n X - Error en el comando verifique - X REP - X \n");
         }else{
-            if(strcmp(name,"mbr")==0){
+            if( (strcmp(name,"mbr")==0) || (strcmp(name,"mbr ")==0) ){
                  printf("\n CREANDO REPORTE MBR \n");
                  reporteMbr(path,id);
 
@@ -846,7 +847,7 @@ void comandosLista(char* cadena){
                  printf("Directorio %s",path);
             }
             else
-             if(strcmp(name,"disk")==0){
+             if( (strcmp(name,"disk")==0) || (strcmp(name,"disk ")==0) ){
                  printf("\n CREANDO REPORTE DE DISCO  \n");
                  reporteDisco(path,id);
 

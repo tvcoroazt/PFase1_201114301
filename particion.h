@@ -8,6 +8,7 @@ typedef struct discos{
     char numero;
 }discos;
 
+
 typedef struct particiones{
     char id[10];
     char path[150];

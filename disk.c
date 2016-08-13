@@ -5,6 +5,7 @@
 #include <time.h>
 
 
+
 void crearDisco(int tamano, char* ruta, char* unidad){
     char control = 0;
     int sizecontrol = 0;
@@ -23,21 +24,21 @@ void crearDisco(int tamano, char* ruta, char* unidad){
         archivo = fopen(ruta,"wt");
 
         if (archivo==NULL){
-            printf("X - ERROR al crear el Disco - X  \n");
+            printf("X - ERROR al crear el Disco ARCHIVO NO EXISTE - X  \n");
         }else{
             int kbyte = 1024;
             int mbyte = kbyte*kbyte;
             char babosadas[mbyte];
             char babosadas2[kbyte];
             int i;
-            if(strcmp(unidad,"m")==0){
+            if(strcmp(unidad,"m ")==0){
                 for(i=0; i<tamano; i++){
                     fwrite(babosadas,sizeof(babosadas),1,archivo);
                 }
              //   mbr.mbr_tamano = tamano*1024*1024;
                 mbr.mbr_tamano = tamano*1048576;
             }else{
-                if (strcmp(unidad,"k")==0){
+                if (strcmp(unidad,"k ")==0){
                     for(i=0;i<tamano; i++){
                         fwrite(babosadas2,sizeof(babosadas2),1,archivo);
                      }
@@ -83,15 +84,15 @@ void crearDisco(int tamano, char* ruta, char* unidad){
 
 int asignarTamano(char* unidad, int tamano){
     int tam = 0;
-    if(strcmp(unidad,"m")==0){
+    if( (strcmp(unidad,"m")==0)  || (strcmp(unidad,"m ")==0) ){
         tam=tamano;
     }
     else
-        if(strcmp(unidad,"k")==0){
+        if( (strcmp(unidad,"k")==0) || (strcmp(unidad,"k ")==0) ){
             tam=tamano*1024;
     }
     else
-        if(strcmp(unidad,"m")==0){
+        if( (strcmp(unidad,"m")==0) || (strcmp(unidad,"m ")==0)  ){
             tam=tamano*1048576;
         }
     return tam;
@@ -124,7 +125,7 @@ int contParPrimarias(char* ruta){
         fseek(disco,0,SEEK_SET);
         fread(&mbr,sizeof(mbr),1,disco);
         for(i=0; i<4; i++){
-            if(mbr.particiones[i].type=='p' && mbr.particiones[i].status=='1'){
+            if(  (mbr.particiones[i].type=='p' && mbr.particiones[i].status=='1') || (mbr.particiones[i].type=='p ' && mbr.particiones[i].status=='1')){
             cont++;
             }
         }
@@ -147,7 +148,7 @@ int contParExtendidas(char* ruta){
         fseek(disco,0,SEEK_SET);
         fread(&mbr,sizeof(mbr),1,disco);
         for(i=0; i<4; i++){
-            if(mbr.particiones[i].type=='e' && mbr.particiones[i].status=='1'){
+            if( (mbr.particiones[i].type=='e' && mbr.particiones[i].status=='1') || (mbr.particiones[i].type=='e ' && mbr.particiones[i].status=='1') ){
                 cont++;
             }
         }
@@ -213,7 +214,7 @@ int inicioLogica(char* ruta){
         fseek(disco,0,SEEK_SET);
         fread(&mbr,sizeof(mbr),1,disco);
         for(i=0;i<4; i++){
-            if(mbr.particiones[i].type=='e'){
+            if((mbr.particiones[i].type=='e') || (mbr.particiones[i].type=='e ')){
                 return mbr.particiones[i].start;
             }
         }
@@ -258,15 +259,19 @@ int inicio(char* ruta, int tamParticion){
 
 void crearParticiones(int size, char* ruta, char* name, char* unit, char* type, char* fit){
     desfragmentar(ruta);
-    if(strcmp(type,"p")==0){
+    if( (strcmp(type,"p")==0) || (strcmp(type,"p ")==0) ){
+        printf("\n                Creando particion PRIMARIA\n");
         nuevaPartPrimaria(type,fit,size,name,unit,ruta);
+
        // ordenar(ruta);     //no lo utilizo porque loqueaaa
     }
     else
-    if(strcmp(type,"l")==0){
+    if( (strcmp(type,"l")==0) || (strcmp(type,"l ")==0) ){
+         printf("\n                 Creando particion LOGICA\n");
         crearParticionLogica(size,ruta,name,unit,type,fit);  //  vamos a componerlos
     }else
-    if(strcmp(type,"e")==0){
+    if( (strcmp(type,"e")==0) || (strcmp(type,"e ")==0) ){
+         printf("\n               Creando particion EXTENDIDA\n");
         crearParticonExtendida(size,ruta,name,unit,type,fit);
     }
     ordenar(ruta);
@@ -322,26 +327,26 @@ void nuevaPartPrimaria(char* type, char* fit, int* size, char* name, char* unit,
                         fseek(disco,0,SEEK_SET);
                         fwrite(&mbr,sizeof(mbr),1,disco);
                         fclose(disco);
-                        printf("\n EXITO!!! - Particion creada \n \n");
+                        printf("\n EXITO!!! - Particion PRIMARIA creada \n \n");
                     }
                     else{
                         printf("\n X - No se puede crear la Particion - X \n");
-                        printf("Ya existen particiones Maximas en el disco \n \n ");
+                        printf("                   Ya existen particiones Maximas en el disco \n \n ");
                     }
                 }
                 else{
                     printf("\n X - No se puede crear la Particion - X \n");
-                    printf("Ya se llego al maximo de particiones primarias \n \n ");
+                    printf("                   Ya se llego al maximo de particiones primarias \n \n ");
                 }
             }
             else{
                 printf("\n X - No se puede crear la Particion - X \n");
-                printf("Ya existe una con el mismo nombre \n \n ");
+                printf("                   Ya existe una con el mismo nombre \n \n ");
             }
         }
         else{
             printf("\n X - No se puede crear la Particion - X \n");
-            printf("Espacio insuficiente en el Disco \n \n ");
+            printf("                   Espacio insuficiente en el Disco \n \n ");
         }
 
     }
@@ -394,27 +399,27 @@ void crearParticonExtendida(int size, char* ruta, char* name, char* unit, char* 
                         fwrite(&mbr,sizeof(mbr),1,disco);
 
                         fclose(disco);
-                        printf("\n EXITO!!! - Particion creada \n \n");
+                        printf("\n EXITO!!! - Particion EXTENDIDA creada \n \n");
 
                     }
                     else{
                         printf("X - ERROR - No se puede crear la particion Extendida - X \n");
-                        printf("X - Limite Maximo de particiones alcanzado - X \n");
+                        printf("X -                     Limite Maximo de particiones alcanzado - X \n");
                     }
                 }
                 else  {
                         printf("X - ERROR - No se puede crear la particion Extendida - X \n");
-                        printf("X - Ya tiene una particion Extendida en el Disco - X \n");
+                        printf("X -                     Ya tiene una particion Extendida en el Disco - X \n");
                 }
             }
             else {
                 printf("X - ERROR - No se puede crear la particion - X \n");
-                printf("X - Ya tiene una particion con el nombre - X \n");
+                printf("X -                     Ya tiene una particion con el nombre - X \n");
             }
         }
         else {
             printf("X - ERROR - No se puede crear la particion - X \n");
-            printf("X - Tiene espacio insuficiente en el Disco - X \n");
+            printf("X -                     Tiene espacio insuficiente en el Disco - X \n");
         }
 
     }
