@@ -120,6 +120,7 @@ void reporteDisco(char* path, char* id){
             fseek(disco,0,SEEK_SET);
             fread(&mbr,sizeof(mbr),1,disco);
 
+
             FILE* reporte;
             reporte = fopen("reporteDisco.txt","w");
 

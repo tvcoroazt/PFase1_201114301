@@ -71,6 +71,8 @@ void crearBloque(char* id, char* type){
             aux2_op= particion.size*0.60;
             aux2_op= aux2_op/130;
 
+
+
             //CREACION DEL CARPETA RAIZ /
 
           //  aux2_op= atoi(sb.ap_bitmap_inodo);

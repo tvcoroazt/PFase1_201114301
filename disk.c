@@ -273,6 +273,7 @@ void crearParticiones(int size, char* ruta, char* name, char* unit, char* type, 
     if( (strcmp(type,"e")==0) || (strcmp(type,"e ")==0) ){
          printf("\n               Creando particion EXTENDIDA\n");
         crearParticonExtendida(size,ruta,name,unit,type,fit);
+
     }
     ordenar(ruta);
      // crearParticonExtendida(size,ruta,name,unit,fit);  //presenta algunos errrores

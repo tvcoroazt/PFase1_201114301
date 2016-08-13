@@ -108,6 +108,7 @@ void asignarID_particion(char* path, char* name){
                     }
                 }
 
+
                 if(sigo==1){
                     if(montada==0){
                         strcpy(parti.id,"vd");
